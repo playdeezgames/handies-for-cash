@@ -34,6 +34,7 @@ Public Module WorldExtensions
     End Function
 
     Private Sub InitializeDarkAlley(location As ILocation)
+        location.CreateVerb(VerbSubtypes.SOLICIT, "Solicit")
     End Sub
 #End Region
     <Extension>

@@ -7,7 +7,12 @@ Public Module LocationVerbExtensions
 
     Private ReadOnly canPerformTable As New Dictionary(Of String, CanPerformHandler) From
         {
+            {VerbSubtypes.SOLICIT, AddressOf CanSolicit}
         }
+
+    Private Function CanSolicit(verb As IVerb, location As ILocation, actor As ICharacter) As Boolean
+        Return Not location.Characters.Any(Function(x) x.EntitySubtype = CharacterSubtypes.JOHN)
+    End Function
 
     <Extension>
     Public Function CanPerform(verb As IVerb, location As ILocation, actor As ICharacter) As Boolean
@@ -20,7 +25,14 @@ Public Module LocationVerbExtensions
 
     Private ReadOnly performTable As New Dictionary(Of String, PerformHandler) From
         {
+            {VerbSubtypes.SOLICIT, AddressOf HandleSolicit}
         }
+
+    Private Sub HandleSolicit(verb As IVerb, location As ILocation, actor As ICharacter)
+        Dim john = location.CreateJohn()
+        actor.AddMessage($"{actor.Name} manages to solicit {john.Name}.")
+        actor.Look()
+    End Sub
 
     <Extension>
     Sub Perform(verb As IVerb, location As ILocation, actor As ICharacter)

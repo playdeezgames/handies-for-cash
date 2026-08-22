@@ -11,6 +11,16 @@ Public Module LocationExtensions
         character.World.Avatar = character
     End Sub
 #End Region
+#Region "John"
+    <Extension>
+    Friend Function CreateJohn(location As ILocation) As ICharacter
+        Return location.CreateCharacter(CharacterSubtypes.JOHN, "John", AddressOf InitializeJohn)
+    End Function
+
+    Private Sub InitializeJohn(character As ICharacter)
+        character.CreateVerb(VerbSubtypes.GIVE_HANDY, "Give Handy")
+    End Sub
+#End Region
 #Region "Door"
     <Extension>
     Friend Function CreateDoor(location As ILocation, name As String, destination As ILocation) As IFeature
