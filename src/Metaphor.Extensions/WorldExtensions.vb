@@ -18,7 +18,7 @@ Public Module WorldExtensions
         world.Clear()
         world.CreateBlueRoom(context)
         world.RespawnEnemies()
-        world.AddMessage("Welcome to Clumsy Oaf of SPLORR!!")
+        world.AddMessage("Welcome to Handies for Cash!")
         world.Avatar.Look()
     End Sub
 End Module

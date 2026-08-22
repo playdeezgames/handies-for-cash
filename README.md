@@ -1,5 +1,4 @@
-# Clumsy Oaf of SPLORR!!
+# Handies for Cash!
 
 A Production of TheGrumpyGameDev
 
-For Soulslike Game Jam #3
