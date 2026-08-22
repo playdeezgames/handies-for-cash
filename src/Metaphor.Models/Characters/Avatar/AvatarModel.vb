@@ -28,18 +28,6 @@ Friend Class AvatarModel
         End Get
     End Property
 
-    Public ReadOnly Property IsDead As Boolean Implements IAvatarModel.IsDead
-        Get
-            Return avatar.IsDead
-        End Get
-    End Property
-
-    Public ReadOnly Property Combat As IAvatarCombatModel Implements IAvatarModel.Combat
-        Get
-            Return AvatarCombatModel.Create(avatar)
-        End Get
-    End Property
-
     Public Sub ShowStatus() Implements IAvatarModel.ShowStatus
         avatar.World.ClearMessages()
         avatar.ShowStatus()
@@ -48,11 +36,6 @@ Friend Class AvatarModel
     Public Sub Look() Implements IAvatarModel.Look
         avatar.World.ClearMessages()
         avatar.Look()
-    End Sub
-
-    Public Sub Respawn() Implements IAvatarModel.Respawn
-        avatar.World.ClearMessages()
-        avatar.Respawn()
     End Sub
 
     Friend Shared Function Create(avatar As ICharacter) As IAvatarModel

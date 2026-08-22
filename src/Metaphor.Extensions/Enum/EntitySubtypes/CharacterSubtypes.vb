@@ -1,4 +1,5 @@
-﻿Friend Class CharacterSubtypes
+﻿Friend NotInheritable Class CharacterSubtypes
+    Private Sub New()
+    End Sub
     Friend Const N00B As String = NameOf(N00B)
-    Friend Const SLIME As String = NameOf(SLIME)
 End Class
