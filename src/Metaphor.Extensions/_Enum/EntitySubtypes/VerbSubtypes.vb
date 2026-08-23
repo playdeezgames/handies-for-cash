@@ -5,4 +5,5 @@
     Friend Const GIVE_HANDY As String = NameOf(GIVE_HANDY)
     Friend Const SLEEP As String = NameOf(SLEEP)
     Friend Const SOLICIT As String = NameOf(SOLICIT)
+    Friend Const WASH_UP As String = NameOf(WASH_UP)
 End Class

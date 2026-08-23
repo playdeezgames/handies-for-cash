@@ -26,6 +26,7 @@ Friend Module LocationInitializationExtensions
 #End Region
 #Region "Pay Toilet"
     Friend Sub InitializePayToilet(location As ILocation)
+        location.CreateSink()
     End Sub
 #End Region
 End Module

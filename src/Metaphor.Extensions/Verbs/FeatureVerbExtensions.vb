@@ -7,8 +7,13 @@ Public Module FeatureVerbExtensions
 #Region "Can Perform"
     Private ReadOnly canPerformTable As New Dictionary(Of String, CanPerformHandler) From
         {
-            {VerbSubtypes.ENTER, AddressOf CanEnter}
+            {VerbSubtypes.ENTER, AddressOf CanEnter},
+            {VerbSubtypes.WASH_UP, AddressOf CanWashUp}
         }
+
+    Private Function CanWashUp(verb As IVerb, feature As IFeature, actor As ICharacter) As Boolean
+        Return actor.GetCounter(Counters.STAMINA) >= feature.GetCounter(Counters.STAMINA)
+    End Function
 
     Private Function CanEnter(verb As IVerb, feature As IFeature, actor As ICharacter) As Boolean
         Return If(feature.TryGetCounter(Counters.CASH), 0) <= actor.GetCash()
@@ -27,8 +32,14 @@ Public Module FeatureVerbExtensions
     Private ReadOnly performTable As New Dictionary(Of String, PerformHandler) From
         {
             {VerbSubtypes.ENTER, AddressOf HandleEnter},
-            {VerbSubtypes.SLEEP, AddressOf HandleSleep}
+            {VerbSubtypes.SLEEP, AddressOf HandleSleep},
+            {VerbSubtypes.WASH_UP, AddressOf HandleWashUp}
         }
+
+    Private Sub HandleWashUp(verb As IVerb, feature As IFeature, actor As ICharacter)
+        actor.ChangeStamina(-feature.GetCounter(Counters.STAMINA))
+        actor.ChangeFilth(-feature.GetCounter(Counters.FILTH))
+    End Sub
 
     Private Sub HandleSleep(verb As IVerb, feature As IFeature, actor As ICharacter)
         actor.AddMessage($"{actor.Name} sleeps on {feature.Name}.")

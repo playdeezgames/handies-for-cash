@@ -37,4 +37,10 @@ Public Module LocationExtensions
         Return location.CreateFeature(FeatureSubtypes.STAINED_MATTRESS, "Stained Mattress", AddressOf FeatureInitializationExtensions.InitializeStainedMattress)
     End Function
 #End Region
+#Region "Sink"
+    <Extension>
+    Friend Function CreateSink(location As ILocation) As IFeature
+        Return location.CreateFeature(FeatureSubtypes.SINK, "Sink", AddressOf FeatureInitializationExtensions.InitializeSink)
+    End Function
+#End Region
 End Module
