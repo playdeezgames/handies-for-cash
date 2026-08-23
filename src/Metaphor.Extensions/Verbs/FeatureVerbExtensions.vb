@@ -27,8 +27,8 @@ Public Module FeatureVerbExtensions
 
     Private Sub HandleSleep(verb As IVerb, feature As IFeature, actor As ICharacter)
         actor.AddMessage($"{actor.Name} sleeps on {feature.Name}.")
-        actor.MaximizeCounter(Counters.STAMINA)
-        actor.AddMessage($"{actor.Name} now has {actor.GetCounterStatistic(Counters.STAMINA)} stamina.")
+        actor.ChangeStamina(actor.GetCounterCapacity(Counters.STAMINA))
+        actor.ChangeFilth(feature.GetCounter(Counters.FILTH))
     End Sub
 
     Private Sub HandleEnter(verb As IVerb, feature As IFeature, actor As ICharacter)

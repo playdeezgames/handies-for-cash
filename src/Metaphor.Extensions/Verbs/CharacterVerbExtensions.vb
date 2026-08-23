@@ -30,6 +30,7 @@ Public Module CharacterVerbExtensions
 
     Private Sub HandleGiveHandy(verb As IVerb, character As ICharacter, actor As ICharacter)
         actor.ChangeStamina(-1)
+        actor.ChangeFilth(1)
         actor.IncrementHandyCount()
         actor.ChangeCash(actor.GetCashPerHandy())
         character.Remove()

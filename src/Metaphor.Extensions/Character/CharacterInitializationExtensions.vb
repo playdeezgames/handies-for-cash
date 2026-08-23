@@ -9,6 +9,7 @@ Friend Module CharacterInitializationExtensions
         character.InitializeCounter(Counters.CASH, 0, 0, Integer.MaxValue)
         character.InitializeCounter(Counters.CASH_PER_HANDY, 5, 5, Integer.MaxValue)
         character.InitializeCounter(Counters.STAMINA, 10, 0, 10)
+        character.InitializeCounter(Counters.FILTH, 0, 0, Integer.MaxValue)
         character.World.Avatar = character
     End Sub
 #End Region

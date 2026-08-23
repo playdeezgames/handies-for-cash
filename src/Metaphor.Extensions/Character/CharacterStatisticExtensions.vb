@@ -30,6 +30,12 @@ Friend Module CharacterStatisticExtensions
         Return character.GetCounter(Counters.HANDY_COUNT)
     End Function
 #End Region
+#Region "Filth"
+    <Extension>
+    Friend Function ChangeFilth(character As ICharacter, filth As Integer, Optional silent As Boolean = False) As Integer
+        Return character.ChangeStatistic(Counters.FILTH, filth, silent)
+    End Function
+#End Region
 #Region "Stamina"
     <Extension>
     Friend Function ChangeStamina(character As ICharacter, stamina As Integer, Optional silent As Boolean = False) As Integer
@@ -41,7 +47,8 @@ Friend Module CharacterStatisticExtensions
         {
             {Counters.CASH, "cash"},
             {Counters.STAMINA, "stamina"},
-            {Counters.HANDY_COUNT, "handies"}
+            {Counters.HANDY_COUNT, "handies"},
+            {Counters.FILTH, "filth"}
         }
     <Extension>
     Private Function ChangeStatistic(character As ICharacter, counterId As String, delta As Integer, Optional silent As Boolean = False) As Integer

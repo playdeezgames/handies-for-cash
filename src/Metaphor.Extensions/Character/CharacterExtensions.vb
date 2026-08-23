@@ -9,6 +9,7 @@ Public Module CharacterExtensions
         character.AddMessage($"Cash: {character.GetCash()}")
         character.AddMessage($"Handies: {character.GetHandyCount()}")
         character.AddMessage($"Stamina: {character.GetCounterStatistic(Counters.STAMINA)}")
+        character.AddMessage($"Filth: {character.GetCounter(Counters.FILTH)}")
     End Sub
 #End Region
 #Region "Look"
