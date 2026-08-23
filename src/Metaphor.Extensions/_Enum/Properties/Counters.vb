@@ -3,4 +3,5 @@
     Friend Const CASH As String = NameOf(CASH)
     Friend Const CASH_PER_HANDY As String = NameOf(CASH_PER_HANDY)
     Friend Const HANDY_COUNT As String = NameOf(HANDY_COUNT)
+    Friend Const STAMINA As String = NameOf(STAMINA)
 End Class

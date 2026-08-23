@@ -7,7 +7,12 @@ Public Module CharacterVerbExtensions
 
     Private ReadOnly canPerformTable As New Dictionary(Of String, CanPerformHandler) From
         {
+            {VerbSubtypes.GIVE_HANDY, AddressOf CanGiveHandy}
         }
+
+    Private Function CanGiveHandy(verb As IVerb, character As ICharacter, actor As ICharacter) As Boolean
+        Return Not actor.IsCounterMinimum(Counters.STAMINA)
+    End Function
 
     <Extension>
     Public Function CanPerform(verb As IVerb, character As ICharacter, actor As ICharacter) As Boolean
@@ -24,13 +29,9 @@ Public Module CharacterVerbExtensions
         }
 
     Private Sub HandleGiveHandy(verb As IVerb, character As ICharacter, actor As ICharacter)
-        actor.AddMessage($"{actor.Name} gives {character.Name} a handy.")
+        actor.ChangeStamina(-1)
         actor.IncrementHandyCount()
-        actor.AddMessage($"{actor.Name} has given {actor.GetHandyCount()} handies.")
-        Dim cash = actor.GetCashPerHandy()
-        actor.AddMessage($"{actor.Name} gets {cash} cash.")
-        actor.ChangeCash(cash)
-        actor.AddMessage($"{actor.Name} now has {actor.GetCash()} cash.")
+        actor.ChangeCash(actor.GetCashPerHandy())
         character.Remove()
     End Sub
 

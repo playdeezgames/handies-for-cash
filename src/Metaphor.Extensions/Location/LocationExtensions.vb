@@ -31,5 +31,10 @@ Public Module LocationExtensions
         toLocation.CreateDoor($"Door to {fromLocation.Name}", fromLocation)
     End Sub
 #End Region
-
+#Region "Stained Mattress"
+    <Extension>
+    Friend Function CreateStainedMattress(location As ILocation) As IFeature
+        Return location.CreateFeature(FeatureSubtypes.STAINED_MATTRESS, "Stained Mattress", AddressOf FeatureInitializationExtensions.InitializeStainedMattress)
+    End Function
+#End Region
 End Module
