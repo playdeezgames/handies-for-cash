@@ -7,7 +7,12 @@ Public Module FeatureVerbExtensions
 #Region "Can Perform"
     Private ReadOnly canPerformTable As New Dictionary(Of String, CanPerformHandler) From
         {
+            {VerbSubtypes.ENTER, AddressOf CanEnter}
         }
+
+    Private Function CanEnter(verb As IVerb, feature As IFeature, actor As ICharacter) As Boolean
+        Return If(feature.TryGetCounter(Counters.CASH), 0) <= actor.GetCash()
+    End Function
 
     <Extension>
     Public Function CanPerform(verb As IVerb, feature As IFeature, actor As ICharacter) As Boolean
@@ -33,6 +38,7 @@ Public Module FeatureVerbExtensions
 
     Private Sub HandleEnter(verb As IVerb, feature As IFeature, actor As ICharacter)
         Dim destination = feature.GetDestination()
+        actor.ChangeCash(-If(feature.TryGetCounter(Counters.CASH), 0))
         actor.AddMessage($"{actor.Name} enters {destination.Name} through {feature.Name}.")
         actor.Location = destination
         actor.Look()

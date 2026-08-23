@@ -13,11 +13,19 @@ Friend Module LocationInitializationExtensions
 #Region "Outside"
     Friend Sub InitializeOutside(location As ILocation)
         location.CreateDoors(location.World.CreateDarkAlley())
+        Dim payToilet = location.World.CreatePayToilet()
+        Dim payDoor = location.CreateDoor($"Door to {payToilet.Name}", payToilet)
+        payDoor.SetCounter(Counters.CASH, 1)
+        payToilet.CreateDoor($"Door to {location.Name}", location)
     End Sub
 #End Region
 #Region "Dark Alley"
     Friend Sub InitializeDarkAlley(location As ILocation)
         location.CreateVerb(VerbSubtypes.SOLICIT, "Solicit")
+    End Sub
+#End Region
+#Region "Pay Toilet"
+    Friend Sub InitializePayToilet(location As ILocation)
     End Sub
 #End Region
 End Module

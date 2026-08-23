@@ -17,6 +17,12 @@ Public Module WorldExtensions
         Return world.CreateLocation(LocationSubtypes.OUTSIDE, "Outside", AddressOf LocationInitializationExtensions.InitializeOutside)
     End Function
 #End Region
+#Region "Pay Toilet"
+    <Extension>
+    Friend Function CreatePayToilet(world As IWorld) As ILocation
+        Return world.CreateLocation(LocationSubtypes.PAY_TOILET, "Pay Toilet", AddressOf LocationInitializationExtensions.InitializePayToilet)
+    End Function
+#End Region
 #Region "Dark Alley"
     <Extension>
     Friend Function CreateDarkAlley(world As IWorld) As ILocation
