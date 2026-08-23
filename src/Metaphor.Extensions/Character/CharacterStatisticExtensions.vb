@@ -20,8 +20,8 @@ Friend Module CharacterStatisticExtensions
 #End Region
 #Region "Handy Count"
     <Extension>
-    Friend Sub IncrementHandyCount(character As ICharacter, Optional silent As Boolean = False)
-        If Not silent Then character.AddMessage($"{character.Name} gives {character.Name} a handy.")
+    Friend Sub IncrementHandyCount(character As ICharacter, target As ICharacter, Optional silent As Boolean = False)
+        If Not silent Then character.AddMessage($"{character.Name} gives {target.Name} a handy.")
         character.ChangeCounter(Counters.HANDY_COUNT, 1)
         If Not silent Then character.AddMessage($"{character.Name} has given {character.GetHandyCount()} handies.")
     End Sub

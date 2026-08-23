@@ -8,7 +8,7 @@ Friend Module FeatureInitializationExtensions
     End Sub
 
     Friend Sub InitializeSink(feature As IFeature)
-        feature.SetCounter(Counters.FILTH, 10)
+        feature.SetCounter(Counters.FILTH, 3)
         feature.SetCounter(Counters.STAMINA, 1)
         feature.CreateVerb(VerbSubtypes.WASH_UP, "Wash Up")
     End Sub
