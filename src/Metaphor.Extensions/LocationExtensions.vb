@@ -5,21 +5,14 @@ Public Module LocationExtensions
 #Region "N00b"
     <Extension>
     Friend Function CreateN00b(location As ILocation, name As String) As ICharacter
-        Return location.CreateCharacter(CharacterSubtypes.N00B, name, AddressOf InitializeN00b)
+        Return location.CreateCharacter(CharacterSubtypes.N00B, name, AddressOf CharacterInitializationExtensions.InitializeN00b)
     End Function
-    Private Sub InitializeN00b(character As ICharacter)
-        character.World.Avatar = character
-    End Sub
 #End Region
 #Region "John"
     <Extension>
     Friend Function CreateJohn(location As ILocation) As ICharacter
-        Return location.CreateCharacter(CharacterSubtypes.JOHN, "John", AddressOf InitializeJohn)
+        Return location.CreateCharacter(CharacterSubtypes.JOHN, "John", AddressOf CharacterInitializationExtensions.InitializeJohn)
     End Function
-
-    Private Sub InitializeJohn(character As ICharacter)
-        character.CreateVerb(VerbSubtypes.GIVE_HANDY, "Give Handy")
-    End Sub
 #End Region
 #Region "Door"
     <Extension>

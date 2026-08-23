@@ -20,7 +20,19 @@ Public Module CharacterVerbExtensions
 
     Private ReadOnly performTable As New Dictionary(Of String, PerformHandler) From
         {
+            {VerbSubtypes.GIVE_HANDY, AddressOf HandleGiveHandy}
         }
+
+    Private Sub HandleGiveHandy(verb As IVerb, character As ICharacter, actor As ICharacter)
+        actor.AddMessage($"{actor.Name} gives {character.Name} a handy.")
+        actor.IncrementHandyCount()
+        actor.AddMessage($"{actor.Name} has given {actor.GetHandyCount()} handies.")
+        Dim cash = actor.GetCashPerHandy()
+        actor.AddMessage($"{actor.Name} gets {cash} cash.")
+        actor.ChangeCash(cash)
+        actor.AddMessage($"{actor.Name} now has {actor.GetCash()} cash.")
+        character.Remove()
+    End Sub
 
     <Extension>
     Sub Perform(verb As IVerb, character As ICharacter, actor As ICharacter)

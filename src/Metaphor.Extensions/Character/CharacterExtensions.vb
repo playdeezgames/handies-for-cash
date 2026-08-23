@@ -6,6 +6,8 @@ Public Module CharacterExtensions
     <Extension>
     Public Sub ShowStatus(character As ICharacter)
         character.AddMessage($"Status:")
+        character.AddMessage($"Cash: {character.GetCash()}")
+        character.AddMessage($"Handies: {character.GetHandyCount()}")
     End Sub
 #End Region
 #Region "Look"

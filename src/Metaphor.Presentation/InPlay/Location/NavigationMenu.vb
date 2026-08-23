@@ -22,13 +22,22 @@ Friend Class NavigationMenu
                 Append(AddressOf ChooseStatus).
                 Append(AddressOf ChooseGround).
                 Append(AddressOf ChooseInventory).
-                Append(AddressOf ChooseCharacters).
+                Concat(Model.Location.Characters.All.Select(AddressOf ChooseCharacter)).
                 Concat(Model.Location.Features.AllVisible.Select(AddressOf ChooseFeature)).
                 Append(AddressOf ChooseLook).
                 Append(AddressOf InPlay.ChooseWatchAd).
                 Append(AddressOf InPlay.ChooseGameMenu)
         End Get
     End Property
+
+    Private Function ChooseCharacter(characterModel As ICharacterModel) As LaunchDelegate
+        Return Function(c, m, p)
+                   Return DialogChoice.Create(
+                        True,
+                        $"{characterModel.Name}...",
+                        CharacterMenu.Launch(c, m, p, characterModel))
+               End Function
+    End Function
 
     Private Function ChooseFeature(featureModel As IFeatureModel) As LaunchDelegate
         Return Function(c, m, p)
@@ -49,10 +58,6 @@ Friend Class NavigationMenu
 
     Private Function ChooseLocationVerb(verbModel As IVerbModel) As LaunchDelegate
         Return Function(c, m, p) DialogChoice.Create(verbModel.IsEnabled, verbModel.Name, LocationVerbActivity.Launch(c, m, p, verbModel))
-    End Function
-
-    Private Function ChooseCharacters(context As IDisplayContext, model As IWorldModel, previous As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(model.Location.Characters.HasAny, "Characters...", CharactersMenu.Launch(context, model, previous))
     End Function
 
     Private Function ChooseInventory(

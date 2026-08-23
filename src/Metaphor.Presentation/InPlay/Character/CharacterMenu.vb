@@ -43,6 +43,6 @@ Friend Class CharacterMenu
     End Function
 
     Private Function ChooseNeverMind(context As IDisplayContext, model As IWorldModel, previous As DialogSource) As IDialogChoice
-        Return DialogChoice.CreateEnabled("Never Mind", CharactersMenu.Launch(context, model, previous))
+        Return DialogChoice.CreateEnabled("Never Mind", InPlay.Launch(context, model, previous))
     End Function
 End Class
