@@ -21,7 +21,14 @@ Public Module ItemVerbExtensions
 #Region "Perform"
     Private ReadOnly performTable As New Dictionary(Of String, PerformHandler) From
         {
+            {VerbSubtypes.EAT, AddressOf HandleEat}
         }
+
+    Private Sub HandleEat(verb As IVerb, item As IItem, actor As ICharacter)
+        actor.AddMessage($"{actor.Name} eats {item.Name}.")
+        actor.ChangeStomach(item.GetCounter(Counters.STOMACH))
+    End Sub
+
     <Extension>
     Sub Perform(verb As IVerb, item As IItem, actor As ICharacter)
         Dim handler As PerformHandler = Nothing

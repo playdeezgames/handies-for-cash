@@ -43,4 +43,10 @@ Public Module LocationExtensions
         Return location.CreateFeature(FeatureSubtypes.SINK, "Sink", AddressOf FeatureInitializationExtensions.InitializeSink)
     End Function
 #End Region
+#Region "Bin"
+    <Extension>
+    Friend Function CreateBin(location As ILocation) As IFeature
+        Return location.CreateFeature(FeatureSubtypes.BIN, "Bin", AddressOf FeatureInitializationExtensions.InitializeBin)
+    End Function
+#End Region
 End Module

@@ -12,5 +12,9 @@ Friend Module FeatureInitializationExtensions
         feature.SetCounter(Counters.STAMINA, 1)
         feature.CreateVerb(VerbSubtypes.WASH_UP, "Wash Up")
     End Sub
+
+    Friend Sub InitializeBin(feature As IFeature)
+        feature.CreateVerb(VerbSubtypes.SALVAGE, "Salvage")
+    End Sub
 #End Region
 End Module

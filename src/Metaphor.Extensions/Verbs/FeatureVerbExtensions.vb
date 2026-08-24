@@ -8,8 +8,13 @@ Public Module FeatureVerbExtensions
     Private ReadOnly canPerformTable As New Dictionary(Of String, CanPerformHandler) From
         {
             {VerbSubtypes.ENTER, AddressOf CanEnter},
-            {VerbSubtypes.WASH_UP, AddressOf CanWashUp}
+            {VerbSubtypes.WASH_UP, AddressOf CanWashUp},
+            {VerbSubtypes.SALVAGE, AddressOf CanSalvage}
         }
+
+    Private Function CanSalvage(verb As IVerb, feature As IFeature, actor As ICharacter) As Boolean
+        Return Not actor.IsCounterMinimum(Counters.STAMINA)
+    End Function
 
     Private Function CanWashUp(verb As IVerb, feature As IFeature, actor As ICharacter) As Boolean
         Return actor.GetCounter(Counters.STAMINA) >= feature.GetCounter(Counters.STAMINA)
@@ -33,8 +38,16 @@ Public Module FeatureVerbExtensions
         {
             {VerbSubtypes.ENTER, AddressOf HandleEnter},
             {VerbSubtypes.SLEEP, AddressOf HandleSleep},
-            {VerbSubtypes.WASH_UP, AddressOf HandleWashUp}
+            {VerbSubtypes.WASH_UP, AddressOf HandleWashUp},
+            {VerbSubtypes.SALVAGE, AddressOf HandleSalvage}
         }
+
+    Private Sub HandleSalvage(verb As IVerb, feature As IFeature, actor As ICharacter)
+        actor.AddMessage($"{actor.Name} salvages in {feature.Name}.")
+        Dim item = actor.Inventory.CreateSammich()
+        actor.AddMessage($"{actor.Name} finds {item.Name}.")
+        actor.DoBiology(1)
+    End Sub
 
     Private Sub HandleWashUp(verb As IVerb, feature As IFeature, actor As ICharacter)
         actor.ChangeStamina(-feature.GetCounter(Counters.STAMINA))
