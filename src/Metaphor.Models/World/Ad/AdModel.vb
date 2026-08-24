@@ -1,4 +1,5 @@
 ﻿Imports Metaphor.Persistence
+Imports TGGD.Extensions
 
 Friend Class AdModel
     Implements IAdModel
@@ -15,19 +16,41 @@ Friend Class AdModel
         End Get
     End Property
 
-    Public Sub Show() Implements IAdModel.Show
-        world.ClearMessages()
-        If world.AdFinish.Value > DateTimeOffset.Now Then
-            Dim timeRemaining = world.AdFinish.Value - DateTimeOffset.Now
-            world.AddMessage($"Time left in ad break: {timeRemaining.ToString("mm\:ss")}")
-            world.AddMessage("(This is a turn based game. As such, this counter will not automatically change. You have to click the OK button to refresh.)")
-            world.AddMessage(
+    Private Delegate Sub AddShower(world As IWorld)
+
+    Private ReadOnly addShowers As New Dictionary(Of AddShower, Integer) From
+        {
+            {AddressOf ShowUmlautFyiAd, 1},
+            {AddressOf ShowPen15SiteAd, 1}
+        }
+
+    Private Sub ShowUmlautFyiAd(world As IWorld)
+        world.AddMessage(
             "For all yer umlauting needs! umlaut.fyi",
             New Dictionary(Of String, String) From
             {
                 {"ELEMENT_TYPE", "LINK"},
                 {"URL", "https://umlaut.fyi/"}
             })
+    End Sub
+
+    Private Sub ShowPen15SiteAd(world As IWorld)
+        world.AddMessage(
+            "Everybody loves Pen 15!",
+            New Dictionary(Of String, String) From
+            {
+                {"ELEMENT_TYPE", "LINK"},
+                {"URL", "https://pen15.site/"}
+            })
+    End Sub
+
+    Public Sub Show() Implements IAdModel.Show
+        world.ClearMessages()
+        If world.AdFinish.Value > DateTimeOffset.Now Then
+            Dim timeRemaining = world.AdFinish.Value - DateTimeOffset.Now
+            world.AddMessage($"Time left in ad break: {timeRemaining.ToString("mm\:ss")}")
+            world.AddMessage("(This is a turn based game. As such, this counter will not automatically change. You have to click the OK button to refresh.)")
+            RNG.FromGenerator(addShowers).Invoke(world)
         Else
             world.AddMessage("Ad break is complete! You may return to yer metaphor!")
             Dim avatar = world.Avatar
