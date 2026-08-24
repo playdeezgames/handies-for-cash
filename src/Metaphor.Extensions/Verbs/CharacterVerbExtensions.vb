@@ -29,12 +29,12 @@ Public Module CharacterVerbExtensions
         }
 
     Private Sub HandleGiveHandy(verb As IVerb, character As ICharacter, actor As ICharacter)
-        actor.DoBiology(1)
         actor.ChangeStamina(-1)
         actor.ChangeFilth(1)
         actor.IncrementHandyCount(character)
         actor.ChangeCash(actor.GetCashPerHandy())
         character.Remove()
+        actor.DoBiology(1)
     End Sub
 
     <Extension>

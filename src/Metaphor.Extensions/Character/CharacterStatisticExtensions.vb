@@ -1,9 +1,9 @@
 ﻿Imports System.Runtime.CompilerServices
 Imports Metaphor.Persistence
 
-Friend Module CharacterStatisticExtensions
+Public Module CharacterStatisticExtensions
     <Extension>
-    Friend Function IsDead(character As ICharacter) As Boolean
+    Public Function IsDead(character As ICharacter) As Boolean
         Return character.IsCounterMinimum(Counters.HEALTH)
     End Function
 #Region "Stomach"

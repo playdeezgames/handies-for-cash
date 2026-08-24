@@ -37,16 +37,16 @@ Public Module FeatureVerbExtensions
         }
 
     Private Sub HandleWashUp(verb As IVerb, feature As IFeature, actor As ICharacter)
-        actor.DoBiology(1)
         actor.ChangeStamina(-feature.GetCounter(Counters.STAMINA))
         actor.ChangeFilth(-feature.GetCounter(Counters.FILTH))
+        actor.DoBiology(1)
     End Sub
 
     Private Sub HandleSleep(verb As IVerb, feature As IFeature, actor As ICharacter)
         actor.AddMessage($"{actor.Name} sleeps on {feature.Name}.")
-        actor.DoBiology(actor.GetCounterCapacity(Counters.STAMINA))
         actor.ChangeStamina(actor.GetCounterCapacity(Counters.STAMINA))
         actor.ChangeFilth(feature.GetCounter(Counters.FILTH))
+        actor.DoBiology(actor.GetCounterCapacity(Counters.STAMINA))
     End Sub
 
     Private Sub HandleEnter(verb As IVerb, feature As IFeature, actor As ICharacter)

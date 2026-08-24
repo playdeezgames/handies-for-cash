@@ -18,6 +18,10 @@ Public Module CharacterExtensions
 #Region "Look"
     <Extension>
     Public Sub Look(character As ICharacter)
+        If character.IsDead Then
+            character.AddMessage($"{character.Name} is dead.")
+            Return
+        End If
         Dim location = character.Location
         character.AddMessage($"{character.Name} is in {location.Name}.")
         DescribeFeatures(location)
