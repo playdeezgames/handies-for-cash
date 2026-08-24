@@ -2,6 +2,28 @@
 Imports Metaphor.Persistence
 
 Friend Module CharacterStatisticExtensions
+    <Extension>
+    Friend Function IsDead(character As ICharacter) As Boolean
+        Return character.IsCounterMinimum(Counters.HEALTH)
+    End Function
+#Region "Stomach"
+    <Extension>
+    Friend Function ChangeStomach(character As ICharacter, stomach As Integer) As Integer
+        Return ChangeStatistic(character, Counters.STOMACH, stomach)
+    End Function
+#End Region
+#Region "Satiety"
+    <Extension>
+    Friend Function ChangeSatiety(character As ICharacter, satiety As Integer) As Integer
+        Return ChangeStatistic(character, Counters.SATIETY, satiety)
+    End Function
+#End Region
+#Region "Health"
+    <Extension>
+    Friend Function ChangeHealth(character As ICharacter, health As Integer) As Integer
+        Return ChangeStatistic(character, Counters.HEALTH, health)
+    End Function
+#End Region
 #Region "Cash"
     <Extension>
     Friend Function GetCash(character As ICharacter) As Integer
@@ -21,9 +43,9 @@ Friend Module CharacterStatisticExtensions
 #Region "Handy Count"
     <Extension>
     Friend Sub IncrementHandyCount(character As ICharacter, target As ICharacter, Optional silent As Boolean = False)
-        If Not silent Then character.AddMessage($"{character.Name} gives {target.Name} a handy.")
+        character.AddMessage($"{character.Name} gives {target.Name} a handy.", silent:=silent)
         character.ChangeCounter(Counters.HANDY_COUNT, 1)
-        If Not silent Then character.AddMessage($"{character.Name} has given {character.GetHandyCount()} handies.")
+        character.AddMessage($"{character.Name} has given {character.GetHandyCount()} handies.", silent:=silent)
     End Sub
     <Extension>
     Friend Function GetHandyCount(character As ICharacter) As Integer
@@ -48,20 +70,21 @@ Friend Module CharacterStatisticExtensions
             {Counters.CASH, "cash"},
             {Counters.STAMINA, "stamina"},
             {Counters.HANDY_COUNT, "handies"},
-            {Counters.FILTH, "filth"}
+            {Counters.FILTH, "filth"},
+            {Counters.STOMACH, "stomach"},
+            {Counters.SATIETY, "satiety"},
+            {Counters.HEALTH, "health"}
         }
     <Extension>
     Private Function ChangeStatistic(character As ICharacter, counterId As String, delta As Integer, Optional silent As Boolean = False) As Integer
         If delta <> 0 Then
             Dim counterName = counterNames(counterId)
-            If Not silent Then character.AddMessage($"{character.Name} {If(delta > 0, "gains", "loses")} {Math.Abs(delta)} {counterName}.")
+            character.AddMessage($"{character.Name} {If(delta > 0, "gains", "loses")} {Math.Abs(delta)} {counterName}.", silent:=silent)
             character.ChangeCounter(counterId, delta)
-            If Not silent Then
-                If character.GetCounterMaximum(counterId) = Integer.MaxValue Then
-                    character.AddMessage($"{character.Name} now has {character.GetCounter(counterId)} {counterName}.")
-                Else
-                    character.AddMessage($"{character.Name} now has {character.GetCounterStatistic(counterId)} {counterName}.")
-                End If
+            If character.GetCounterMaximum(counterId) = Integer.MaxValue Then
+                character.AddMessage($"{character.Name} now has {character.GetCounter(counterId)} {counterName}.", silent:=silent)
+            Else
+                character.AddMessage($"{character.Name} now has {character.GetCounterStatistic(counterId)} {counterName}.", silent:=silent)
             End If
         End If
         Return character.GetCounter(counterId)

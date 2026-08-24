@@ -39,6 +39,7 @@ Public Module LocationVerbExtensions
             Dim john = location.CreateJohn()
             actor.AddMessage($"{actor.Name} manages to solicit {john.Name}.")
         End If
+        actor.DoBiology(1)
         actor.Look()
     End Sub
 

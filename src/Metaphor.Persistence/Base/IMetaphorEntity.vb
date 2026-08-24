@@ -11,7 +11,7 @@ Public Interface IMetaphorEntity
     Function CreateVerb(verbSubtype As String, name As String, Optional initializer As VerbInitializer = Nothing) As IVerb
     ReadOnly Property Verbs As IEnumerable(Of IVerb)
     ReadOnly Property Inventory As IInventory
-    Sub AddMessage(text As String, Optional hints As IDictionary(Of String, String) = Nothing)
+    Sub AddMessage(text As String, Optional hints As IDictionary(Of String, String) = Nothing, Optional silent As Boolean = False)
     Sub InitializeCounter(counterId As String, value As Integer, minimum As Integer, maximum As Integer)
     Function GetCounterPercentage(counterId As String) As String
     Sub InitializeDimension(

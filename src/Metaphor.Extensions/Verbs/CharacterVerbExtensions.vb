@@ -29,6 +29,7 @@ Public Module CharacterVerbExtensions
         }
 
     Private Sub HandleGiveHandy(verb As IVerb, character As ICharacter, actor As ICharacter)
+        actor.DoBiology(1)
         actor.ChangeStamina(-1)
         actor.ChangeFilth(1)
         actor.IncrementHandyCount(character)

@@ -59,8 +59,13 @@ Friend MustInherit Class MetaphorEntity(Of TData As EntityData)
         Return result
     End Function
 
-    Public Sub AddMessage(text As String, Optional hints As IDictionary(Of String, String) = Nothing) Implements IMetaphorEntity.AddMessage
-        World.AddMessage(text, hints)
+    Public Sub AddMessage(
+                         text As String,
+                         Optional hints As IDictionary(Of String, String) = Nothing,
+                         Optional silent As Boolean = False) Implements IMetaphorEntity.AddMessage
+        If Not silent Then
+            World.AddMessage(text, hints)
+        End If
     End Sub
 
     Public Sub InitializeCounter(counterId As String, value As Integer, minimum As Integer, maximum As Integer) Implements IMetaphorEntity.InitializeCounter
