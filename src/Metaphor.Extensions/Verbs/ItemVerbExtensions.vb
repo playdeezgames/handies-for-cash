@@ -27,6 +27,7 @@ Public Module ItemVerbExtensions
     Private Sub HandleEat(verb As IVerb, item As IItem, actor As ICharacter)
         actor.AddMessage($"{actor.Name} eats {item.Name}.")
         actor.ChangeStomach(item.GetCounter(Counters.STOMACH))
+        item.Remove()
     End Sub
 
     <Extension>
