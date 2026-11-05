@@ -32,6 +32,7 @@ The metaphor has been rebuilt in Odin and WebAssembly. The places, the verbs and
 - Sleeping now costs food (it used to feed you).
 - Messages say what actually changed.
 - It has a layout for phones held upright.
+- The old Windows, macOS and Linux downloads have been removed: it plays right here in the browser. The original source is still on GitHub.
 
 The full list is in QUIRKS.md in the source.
 
@@ -50,7 +51,7 @@ Font: DINOBYTE by mby, https://mby.itch.io/dinobyte, CC BY 4.0 (https://creative
 **Notes (not for the page)**
 
 - The short description is 108 characters (itch.io allows 120).
-- Ship day: `./shippit.sh --push` replaces the `html` channel. The page already embeds the browser build, so Kind of project stays HTML. **Open for the user:** the windows, linux and mac downloads (the 2026 Spectre console builds) are still on the page; Key Seeker and Wonting had theirs removed on ship day. The port does not replace them.
+- Ship day: `./shippit.sh --push` replaces the `html` channel. The page already embeds the browser build, so Kind of project stays HTML. Then remove the windows, linux and mac downloads (the 2026 Spectre console builds) in the dashboard: the user's rule for every port (November 5, 2026).
 - Set the page's AI generation disclosure to Yes (Code), as for Wonting.
 - GitHub Pages is live (November 5, 2026): https://playdeezgames.github.io/handies-for-cash/. Keep the "Latest version" line and add it as an external link on the page.
 - Upload `assets/cover.png` (new, drawn from the DINOBYTE sheet by `tools/make_cover.py`; the old cover was a screenshot of the Blazor title) and the screenshots in `assets/screenshots/` (rendered from the real game by `tools/make_shots.sh`).
