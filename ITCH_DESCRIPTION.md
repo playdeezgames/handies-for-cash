@@ -52,6 +52,6 @@ Font: DINOBYTE by mby, https://mby.itch.io/dinobyte, CC BY 4.0 (https://creative
 - The short description is 108 characters (itch.io allows 120).
 - Ship day: `./shippit.sh --push` replaces the `html` channel. The page already embeds the browser build, so Kind of project stays HTML. **Open for the user:** the windows, linux and mac downloads (the 2026 Spectre console builds) are still on the page; Key Seeker and Wonting had theirs removed on ship day. The port does not replace them.
 - Set the page's AI generation disclosure to Yes (Code), as for Wonting.
-- The "Latest version" line only works once GitHub Pages is live for this repo (`tools/pages.sh`, commit `docs/`, push, enable Pages from `main` `/docs`). If Pages is not live by ship day, leave that line out.
+- GitHub Pages is live (November 5, 2026): https://playdeezgames.github.io/handies-for-cash/. Keep the "Latest version" line and add it as an external link on the page.
 - Upload `assets/cover.png` (new, drawn from the DINOBYTE sheet by `tools/make_cover.py`; the old cover was a screenshot of the Blazor title) and the screenshots in `assets/screenshots/` (rendered from the real game by `tools/make_shots.sh`).
 - The share text (og:description) still says "An entry for https://itch.io/jam/soulslike-game-jam-3"; the user may want to fix it in the page settings.

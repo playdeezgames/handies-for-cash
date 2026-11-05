@@ -4,7 +4,7 @@ A Production of TheGrumpyGameDev
 
 A metaphor about giving handies in exchange for cash. In a dark alley. Text only.
 
-- Play: https://thegrumpygamedev.itch.io/handies-for-cash (and, once GitHub Pages is enabled, https://playdeezgames.github.io/handies-for-cash/)
+- Play: https://playdeezgames.github.io/handies-for-cash/ (GitHub Pages, the latest build) or https://thegrumpygamedev.itch.io/handies-for-cash
 - The original (August 2026) is VB.NET in `src/`, with a Spectre console client and a Blazor browser client.
 - The browser version (November 2026) is Odin compiled to WebAssembly in `odin/`, ported by Claude Code (an AI agent) at the author's direction. What changed is in `QUIRKS.md`.
 
